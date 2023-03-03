@@ -1,0 +1,65 @@
+server:
+  port: 8081
+spring:
+  application:
+    name: springCloud-test
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    driverClassName: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/cloud_user?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=Asia/Shanghai&zeroDateTimeBehavior=convertToNull
+    username: root
+    password: 123456
+    hikari:
+      minimum-idle: 5
+      idle-timeout: 180000
+      maximum-pool-size: 10
+      auto-commit: true
+      pool-name: MyHikariCP
+      max-lifetime: 1800000
+      connection-timeout: 30000
+  cloud:
+    discovery:
+      enabled: true
+    nacos:
+      discovery:
+        server-addr: 192.168.0.121:8848
+        enabled: true
+        namespace: public
+
+springCloud-test:
+  ribbon.NFLoadBalancerRuleClassName: com.netflix.loadbalancer.RandomRule
+
+shenyu:
+  register:
+    registerType: nacos #zookeeper #etcd #nacos #consul
+    serverLists: http://192.168.0.121:8848 #localhost:2181 #http://localhost:2379 #localhost:8848
+    props:
+      username: nacos
+      password: nacos
+      nacosNameSpace: public
+  client:
+    springCloud:
+      props:
+        contextPath: /springcloud
+        addPrefixed: false
+
+
+
+#shenyu:
+#  client: # 用于接口暴露的注册 命名空间ShenyuRegisterCenter
+#    registerType: nacos # http #zookeeper #etcd #nacos #consul
+#    serverLists: 192.168.0.121:8848 # http://localhost:9095 #localhost:2181 #http://localhost:2379 #localhost:8848
+#    props:
+#      contextPath: /springcloud  # 网关前缀 必须存在 网关通过该前缀访问 会在服务发现层转换为serviceId
+#      port: 8081
+#      nacosNameSpace: ShenyuRegisterCenter
+
+
+logging:
+  level:
+    com.xx.mybatis: DEBUG
+    com.xx: DEBUG
+
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
