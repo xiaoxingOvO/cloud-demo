@@ -19,7 +19,7 @@ import java.time.format.DateTimeFormatter;
 @RequestMapping("/user")
 @Api(value = "用户接口管理",tags = "用户接口管理")
 //@RefreshScope
-@ShenyuSpringCloudClient(path = "/user/**")
+@ShenyuSpringCloudClient
 public class UserController {
 
     @Autowired

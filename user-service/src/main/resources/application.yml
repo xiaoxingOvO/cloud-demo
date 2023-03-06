@@ -2,7 +2,7 @@ server:
   port: 8081
 spring:
   application:
-    name: springCloud-test
+    name: userservice
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
     driverClassName: com.mysql.cj.jdbc.Driver
@@ -18,13 +18,17 @@ spring:
       max-lifetime: 1800000
       connection-timeout: 30000
   cloud:
+    cloud:
+      loadbalancer:
+        ribbon:
+          enabled: true
     discovery:
       enabled: true
     nacos:
       discovery:
         server-addr: 192.168.0.121:8848
         enabled: true
-        namespace: public
+        namespace: 8829b0cd-670a-40b0-86a1-6e80220b5450
 
 springCloud-test:
   ribbon.NFLoadBalancerRuleClassName: com.netflix.loadbalancer.RandomRule
@@ -36,23 +40,15 @@ shenyu:
     props:
       username: nacos
       password: nacos
-      nacosNameSpace: public
+      nacosNameSpace: 8829b0cd-670a-40b0-86a1-6e80220b5450
   client:
     springCloud:
       props:
-        contextPath: /springcloud
-        addPrefixed: false
-
-
-
-#shenyu:
-#  client: # 用于接口暴露的注册 命名空间ShenyuRegisterCenter
-#    registerType: nacos # http #zookeeper #etcd #nacos #consul
-#    serverLists: 192.168.0.121:8848 # http://localhost:9095 #localhost:2181 #http://localhost:2379 #localhost:8848
-#    props:
-#      contextPath: /springcloud  # 网关前缀 必须存在 网关通过该前缀访问 会在服务发现层转换为serviceId
-#      port: 8081
-#      nacosNameSpace: ShenyuRegisterCenter
+        contextPath: /userservice
+#    nacos:
+#      props:
+#        contextPath: /userservice
+#        addPrefixed: false
 
 
 logging:

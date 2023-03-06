@@ -7,6 +7,7 @@ import cn.xx.order.model.vo.OrderVO;
 import cn.xx.order.service.OrderService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.apache.shenyu.client.springcloud.annotation.ShenyuSpringCloudClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,7 +17,7 @@ import org.springframework.web.client.RestTemplate;
 @RestController
 @RequestMapping("order")
 @Api(value = "订单接口管理",tags = "订单接口管理")
-//@ShenyuSpringCloudClient("/order/**")
+@ShenyuSpringCloudClient
 public class OrderController {
 
    private OrderService orderService;

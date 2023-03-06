@@ -22,11 +22,16 @@
             <artifactId>shenyu-spring-boot-starter-client-springcloud</artifactId>
         </dependency>
 
-        <!--nacos-->
         <dependency>
-            <groupId>com.alibaba.cloud</groupId>
-            <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
+            <groupId>org.apache.shenyu</groupId>
+            <artifactId>shenyu-register-client-nacos</artifactId>
         </dependency>
+
+        <!--nacos-->
+<!--        <dependency>-->
+<!--            <groupId>com.alibaba.cloud</groupId>-->
+<!--            <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>-->
+<!--        </dependency>-->
         <!--feign客户端依赖-->
         <dependency>
             <groupId>org.springframework.cloud</groupId>

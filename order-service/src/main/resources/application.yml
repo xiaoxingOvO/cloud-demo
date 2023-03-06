@@ -23,10 +23,11 @@ spring:
   cloud:
     discovery:
       enabled: true
-#    nacos:
-#      discovery:
-#        server-addr: localhost:8848
-#        enabled: true
+    nacos:
+      discovery:
+        server-addr: 192.168.0.121:8848
+        enabled: true
+        namespace: 8829b0cd-670a-40b0-86a1-6e80220b5450
 
 #eureka:
 #  client:
@@ -41,12 +42,16 @@ shenyu:
     props:
       username: nacos
       password: nacos
-      nacosNameSpace: public
+      nacosNameSpace: 8829b0cd-670a-40b0-86a1-6e80220b5450
   client:
     springCloud:
       props:
-        contextPath: /user
+        contextPath: /orderservice
         addPrefixed: false
+#    nacos:
+#      props:
+#        contextPath: /orderservice
+#        addPrefixed: false
 
 
 feign:
