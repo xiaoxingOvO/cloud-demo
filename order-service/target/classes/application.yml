@@ -1,0 +1,74 @@
+server:
+  port: 8080
+spring:
+  application:
+    name: orderservice
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    driverClassName: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/cloud_order?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=Asia/Shanghai&zeroDateTimeBehavior=convertToNull
+    username: root
+    password: 123456
+    hikari:
+      minimum-idle: 5
+      idle-timeout: 180000
+      maximum-pool-size: 10
+      auto-commit: true
+      pool-name: MyHikariCP
+      max-lifetime: 1800000
+      connection-timeout: 30000
+  cloud:
+    discovery:
+      enabled: true
+    nacos:
+      discovery:
+        server-addr: 192.168.0.121:8848
+        enabled: true
+        namespace: 8829b0cd-670a-40b0-86a1-6e80220b5450
+
+#eureka:
+#  client:
+#    service-url:
+#      defaultZone: http://127.0.0.1:10086/eureka
+
+
+shenyu:
+  register:
+    registerType: nacos #zookeeper #etcd #nacos #consul
+    serverLists: http://192.168.0.121:8848 #localhost:2181 #http://localhost:2379 #localhost:8848
+    props:
+      username: nacos
+      password: nacos
+      nacosNameSpace: 8829b0cd-670a-40b0-86a1-6e80220b5450
+  client:
+    springCloud:
+      props:
+        contextPath: /orderservice
+        addPrefixed: false
+#    nacos:
+#      props:
+#        contextPath: /orderservice
+#        addPrefixed: false
+
+
+feign:
+  client:
+    config:
+      default: # default全局的配置
+        loggerLevel: BASIC # 日志级别，BASIC就是基本的请求和响应信息
+  httpclient:
+    enabled: true # 开启feign对HttpClient的支持
+    max-connections: 200 # 最大的连接数
+    max-connections-per-route: 50 # 每个路径的最大连接数
+
+logging:
+  level:
+    com.xx.mybatis: DEBUG
+    com.xx: DEBUG
+
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
