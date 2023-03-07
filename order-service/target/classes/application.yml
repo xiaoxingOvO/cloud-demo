@@ -26,23 +26,35 @@ spring:
     nacos:
       discovery:
         server-addr: 192.168.0.121:8848
-        enabled: true
+        enabled: false
         namespace: 8829b0cd-670a-40b0-86a1-6e80220b5450
 
-#eureka:
-#  client:
-#    service-url:
-#      defaultZone: http://127.0.0.1:10086/eureka
+eureka:
+  client:
+    enabled: true
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+  instance:
+    prefer-ip-address: true
+
+springCloud-test:
+  ribbon.NFLoadBalancerRuleClassName: com.netflix.loadbalancer.RandomRule
 
 
 shenyu:
   register:
-    registerType: nacos #zookeeper #etcd #nacos #consul
-    serverLists: http://192.168.0.121:8848 #localhost:2181 #http://localhost:2379 #localhost:8848
+    #    registerType: nacos #zookeeper #etcd #nacos #consul
+    #    serverLists: http://localhost:8848 #localhost:2181 #http://localhost:2379 #localhost:8848
+    #    props:
+    #      username: nacos
+    #      password: nacos
+    #      nacosNameSpace: 047310e6-bd04-453e-a199-6342d87af3c9
+    registerType: http #zookeeper #etcd #nacos #consul
+    serverLists: http://localhost:9095 #localhost:2181 #http://localhost:2379 #localhost:8848
     props:
-      username: nacos
-      password: nacos
-      nacosNameSpace: 8829b0cd-670a-40b0-86a1-6e80220b5450
+      username: admin
+      password: 123456
+      nacosNameSpace: ShenyuRegisterCenter
   client:
     springCloud:
       props:
@@ -52,7 +64,6 @@ shenyu:
 #      props:
 #        contextPath: /orderservice
 #        addPrefixed: false
-
 
 feign:
   client:

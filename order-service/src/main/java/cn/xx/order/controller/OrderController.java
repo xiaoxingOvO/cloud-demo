@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
 @RestController
-@RequestMapping("order")
+@RequestMapping("/order")
 @Api(value = "订单接口管理",tags = "订单接口管理")
 @ShenyuSpringCloudClient
 public class OrderController {
@@ -37,7 +37,7 @@ public class OrderController {
         OrderDTO orderDTO = orderService.findById(orderId);
         //远程调用获取user信息
 //        String url = "http://localhost:8081/user/"+orderDTO.getUserId();
-        String url = "http://userservice/user/"+orderDTO.getUserId();
+        String url = "http://userservice/user/findById/"+orderDTO.getUserId();
         //使用restTemplate
 //        UserDTO user = restTemplate.getForObject(url, UserDTO.class);
 

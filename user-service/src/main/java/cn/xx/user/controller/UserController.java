@@ -5,6 +5,8 @@ import cn.xx.user.service.UserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.shenyu.client.springcloud.annotation.ShenyuGetMapping;
+import org.apache.shenyu.client.springcloud.annotation.ShenyuRequestMapping;
 import org.apache.shenyu.client.springcloud.annotation.ShenyuSpringCloudClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -17,9 +19,10 @@ import java.time.format.DateTimeFormatter;
 @Slf4j
 @RestController
 @RequestMapping("/user")
+//@ShenyuRequestMapping("/user")
+@ShenyuSpringCloudClient
 @Api(value = "用户接口管理",tags = "用户接口管理")
 //@RefreshScope
-@ShenyuSpringCloudClient
 public class UserController {
 
     @Autowired
@@ -36,8 +39,18 @@ public class UserController {
      * @return 用户
      */
     @ApiOperation("根据id查询用户")
-    @GetMapping("/{id}")
-    public User queryById(@PathVariable("id") String id) {
+    @GetMapping("/queryById")
+    public User queryById(@RequestParam("id") String id) {
+        return userService.findById(id);
+    }
+
+    /**
+     * @param id 用户id
+     * @return 用户
+     */
+    @ApiOperation("根据id查询用户")
+    @GetMapping("/findById/{id}")
+    public User findById(@PathVariable("id") String id) {
         return userService.findById(id);
     }
 

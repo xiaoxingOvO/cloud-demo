@@ -18,17 +18,24 @@ spring:
       max-lifetime: 1800000
       connection-timeout: 30000
   cloud:
-    cloud:
-      loadbalancer:
-        ribbon:
-          enabled: true
+    loadbalancer:
+      ribbon:
+        enabled: true
     discovery:
       enabled: true
     nacos:
       discovery:
-        server-addr: 192.168.0.121:8848
+        server-addr: localhost:8848 # Spring Cloud Alibaba Dubbo use this.
         enabled: true
-        namespace: 8829b0cd-670a-40b0-86a1-6e80220b5450
+        namespace: 047310e6-bd04-453e-a199-6342d87af3c9
+
+eureka:
+  client:
+    enabled: false
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+  instance:
+    prefer-ip-address: true
 
 springCloud-test:
   ribbon.NFLoadBalancerRuleClassName: com.netflix.loadbalancer.RandomRule
@@ -36,20 +43,22 @@ springCloud-test:
 shenyu:
   register:
     registerType: nacos #zookeeper #etcd #nacos #consul
-    serverLists: http://192.168.0.121:8848 #localhost:2181 #http://localhost:2379 #localhost:8848
+    serverLists: http://localhost:8848 #localhost:2181 #http://localhost:2379 #localhost:8848
     props:
       username: nacos
       password: nacos
-      nacosNameSpace: 8829b0cd-670a-40b0-86a1-6e80220b5450
+      nacosNameSpace: 047310e6-bd04-453e-a199-6342d87af3c9
+#    registerType: http #zookeeper #etcd #nacos #consul
+#    serverLists: http://localhost:9095 #localhost:2181 #http://localhost:2379 #localhost:8848
+#    props:
+#      username: admin
+#      password: 123456
+#      nacosNameSpace: ShenyuRegisterCenter
   client:
     springCloud:
       props:
         contextPath: /userservice
-#    nacos:
-#      props:
-#        contextPath: /userservice
-#        addPrefixed: false
-
+        addPrefixed: false
 
 logging:
   level:
