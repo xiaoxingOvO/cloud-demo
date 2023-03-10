@@ -27,7 +27,7 @@ spring:
       discovery:
         server-addr: localhost:8848 # Spring Cloud Alibaba Dubbo use this.
         enabled: true
-        namespace: 047310e6-bd04-453e-a199-6342d87af3c9
+        namespace: 610da680-cfaf-4c6f-8ca5-10584fd5e467
 
 eureka:
   client:
@@ -37,9 +37,6 @@ eureka:
   instance:
     prefer-ip-address: true
 
-springCloud-test:
-  ribbon.NFLoadBalancerRuleClassName: com.netflix.loadbalancer.RandomRule
-
 shenyu:
   register:
     registerType: nacos #zookeeper #etcd #nacos #consul
@@ -47,7 +44,7 @@ shenyu:
     props:
       username: nacos
       password: nacos
-      nacosNameSpace: 047310e6-bd04-453e-a199-6342d87af3c9
+      nacosNameSpace: 610da680-cfaf-4c6f-8ca5-10584fd5e467
 #    registerType: http #zookeeper #etcd #nacos #consul
 #    serverLists: http://localhost:9095 #localhost:2181 #http://localhost:2379 #localhost:8848
 #    props:
